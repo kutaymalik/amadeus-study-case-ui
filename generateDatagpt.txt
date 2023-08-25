@@ -1,0 +1,36 @@
+önümüzdeki 2 ay boyunca her gün her şehirden diğer bir şehirle karşılıklı bir uçuş olacak şekilde şu formatta
+{
+  "departureAirport": "Istanbul",
+  "arrivalAirport": "Berlin",
+  "departureDate": {
+    "$date": "2023-08-05T19:00:00.000Z"
+  },
+  "arrivalDate": {
+    "$date": "2023-08-05T22:00:00.000Z"
+  },
+  "flightCode": "ISBE230805",
+  "price": 216,
+  "flightLength": 180,
+  "slugArrAir": "berlin",
+  "slugDepAir": "istanbul",
+}
+price alanı bu şekilde üretilecek const priceCalc = (departureDate, arrivalDate) => {
+    let length = flightLengthCalc(departureDate, arrivalDate);
+
+    let price = Math.round((1297 / 18) * (length / 60));
+
+    return price;
+}
+flightLength alanı bu şekilde üretilecek const flightLengthCalc = (departureDate, arrivalDate) => {
+    let depDate = new Date(departureDate);
+    let arrDate = new Date(arrivalDate);
+    let differenceVal = (depDate.getTime() - arrDate.getTime()) / 1000;
+    differenceVal /= 60;
+    return Math.abs(Math.round(differenceVal));
+}
+
+slugarrAir alanı arrivalAirport alanının tüm harfleri küçük hali olacak
+
+slugDepAir alanı departureAirport alanının tüm harfleri küçük hali olacak
+
+ şehirler istanbul, berlin, madrid, new york, ankara, paris, london, rome, miami, moscow uçuş dataları üretir misin bu kodu dosyaya kaydedecek şekilde değil de print edecek şekilde verir misin
